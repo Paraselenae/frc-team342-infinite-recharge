@@ -12,12 +12,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LimelightSubsystem extends SubsystemBase {
   private NetworkTable table;
-  private NetworkTableEntry tv, ty, tx, camMode, ledMode;
-  private double yOffsetAngle, xOffsetAngle;
+  private NetworkTableEntry tv, ty, tx, camMode, ledMode, llAngle;
+  private double yOffsetAngle, xOffsetAngle, limelightAngle;
   private int cameraMode, lightMode, validTarget;
   private double limeError = 2.5;
 
@@ -31,6 +32,11 @@ public class LimelightSubsystem extends SubsystemBase {
     tx = table.getEntry("tx");
     camMode = table.getEntry("camMode");
     ledMode = table.getEntry("ledMode");
+
+    // added for testing limelight values
+    // represents the angle the limelight is mounted at
+    // on A bot the angle is closest to ~17 deg
+    llAngle = Shuffleboard.getTab("SmartDashboard").add("llAngle", 15).getEntry();
   }
 
   @Override
@@ -41,8 +47,12 @@ public class LimelightSubsystem extends SubsystemBase {
     xOffsetAngle = tx.getDouble(0.0);
     cameraMode = camMode.getNumber(0).intValue();
     lightMode = ledMode.getNumber(0).intValue();
+    limelightAngle = llAngle.getDouble(0);
 
+
+    visionOn();
     SmartDashboard.putNumber("Limelight Distance", getDistance());
+    table.getEntry("distance").setNumber(getDistance());
   }
 
   /*
@@ -50,7 +60,7 @@ public class LimelightSubsystem extends SubsystemBase {
    * 
    */
   public double getDistance() {
-    return (90.0 - 21.125) / Math.tan((yOffsetAngle + 15.0) * Math.PI / 180);
+    return (90.0 - 21.125) / Math.tan((yOffsetAngle + limelightAngle) * Math.PI / 180);
   }
 
   /*

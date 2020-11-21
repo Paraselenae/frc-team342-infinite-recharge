@@ -123,5 +123,10 @@ public class LimelightSubsystem extends SubsystemBase {
     return (validTarget == 1) ? true : false;
   }
 
+  // used for unit tests
+  public void setNetworkTable (NetworkTable table) {
+    this.table = table;
+  }
+
 }
 

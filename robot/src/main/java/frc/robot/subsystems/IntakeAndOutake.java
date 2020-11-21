@@ -271,4 +271,16 @@ public class IntakeAndOutake extends SubsystemBase {
   public double codeToRpms(double code) {
     return code * rpmsConverter;
   }
+
+  // used for unit tests
+  public void setSensors(DigitalInput sensor1, DigitalInput sensor2, DigitalInput sensor3) {
+    this.sensor1 = sensor1;
+    this.sensor2 = sensor2;
+    this.sensor3 = sensor3;
+  }
+
+  public int getPowerCellCount() {
+    powerCellCount();
+    return powerCellCount;
+  }
 }

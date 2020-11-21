@@ -28,6 +28,10 @@ deploy {
 
 def includeDesktopSupport = false
 
+repositories {
+    jcenter()
+}
+
 dependencies {
     implementation wpi.deps.wpilib()
     nativeZip wpi.deps.wpilibJni(wpi.platforms.roborio)
@@ -37,12 +41,19 @@ dependencies {
     nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
     nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
 
-    testImplementation 'junit:junit:4.12'
-
     simulation wpi.deps.sim.gui(wpi.platforms.desktop, false)
+    
+    // Dependencies for unit tests 
+    testCompile "org.mockito:mockito-core:2.+"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 jar {
 	from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest("frc.robot.Main")
+}
+
+test {
+    useJUnitPlatform()
 }

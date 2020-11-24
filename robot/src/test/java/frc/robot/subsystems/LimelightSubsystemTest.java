@@ -2,8 +2,7 @@ package frc.robot.subsystems;
 
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import edu.wpi.first.networktables.NetworkTable;
@@ -25,14 +24,19 @@ class LimelightSubsystemTest {
 
     @Test
     void distanceTest() {
+        double distance;
+
         // TODO: get limelight values that correspond to distances
         when(ty.getDouble(anyDouble())).thenReturn(0.0);
-        assertEquals(0.0, subsystem.getDistance());
+        distance = subsystem.getDistance();
+        assertTrue(distance > -3 && distance < 3); // ~3 inches is acceptible range
 
         when(ty.getDouble(anyDouble())).thenReturn(0.0);
-        assertEquals(0.0, subsystem.getDistance());
+        distance = subsystem.getDistance();
+        assertTrue(distance > -3 && distance < 3);
 
         when(ty.getDouble(anyDouble())).thenReturn(0.0);
-        assertEquals(0.0, subsystem.getDistance());
+        distance = subsystem.getDistance();
+        assertTrue(distance > -3 && distance < 3);
     }
 }

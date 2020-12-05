@@ -23,6 +23,7 @@ class LimelightSubsystemTest {
     }
 
     @Test
+    @Disabled("Distance method is not used anymore")
     void distanceTest() {
         double distance;
 

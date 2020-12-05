@@ -28,12 +28,17 @@ class IntakeAndOuttakeTest {
     @Test
     @Disabled("Not finished")
     void powerCellCounterTest() {
-        //TODO: ask somebody what these numbers mean
+        // All sensors are empty
+        when(sensor1.get()).thenReturn(true);
+        when(sensor2.get()).thenReturn(true);
+        when(sensor3.get()).thenReturn(true);
         assertEquals(0, subsystem.getPowerCellCount());
 
+        when(sensor1.get()).thenReturn(false);
         assertEquals(1, subsystem.getPowerCellCount());
 
-        assertEquals(3, subsystem.getPowerCellCount());
+        subsystem.reverseIntake();
+        assertEquals(0, subsystem.getPowerCellCount());
     }
 
     // Tests to make sure the intake stops when the hopper is full

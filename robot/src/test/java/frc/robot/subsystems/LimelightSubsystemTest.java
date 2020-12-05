@@ -26,17 +26,29 @@ class LimelightSubsystemTest {
     void distanceTest() {
         double distance;
 
-        // TODO: get limelight values that correspond to distances
-        when(ty.getDouble(anyDouble())).thenReturn(0.0);
+        when(ty.getDouble(anyDouble())).thenReturn(13.62);
         distance = subsystem.getDistance();
-        assertTrue(distance > -3 && distance < 3); // ~3 inches is acceptible range
+        System.out.println(distance);
+        assertTrue(distance > 125 && distance < 131); // ~3 inches is acceptible range
 
-        when(ty.getDouble(anyDouble())).thenReturn(0.0);
+        when(ty.getDouble(anyDouble())).thenReturn(16.93);
         distance = subsystem.getDistance();
-        assertTrue(distance > -3 && distance < 3);
+        assertTrue(distance > 110 && distance < 116);
 
-        when(ty.getDouble(anyDouble())).thenReturn(0.0);
+        when(ty.getDouble(anyDouble())).thenReturn(21.25);
         distance = subsystem.getDistance();
-        assertTrue(distance > -3 && distance < 3);
+        assertTrue(distance > 92 && distance < 98); 
+
+        when(ty.getDouble(anyDouble())).thenReturn(10.82);
+        distance = subsystem.getDistance();
+        assertTrue(distance > 145 && distance < 151);
+
+        when(ty.getDouble(anyDouble())).thenReturn(8.13);
+        distance = subsystem.getDistance();
+        assertTrue(distance > 161 && distance < 167);
+
+        when(ty.getDouble(anyDouble())).thenReturn(6.42);
+        distance = subsystem.getDistance();
+        assertTrue(distance > 179 && distance < 185);
     }
 }

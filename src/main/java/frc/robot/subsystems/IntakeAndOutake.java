@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.Factory;
+import frc.robot.RobotContainer;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -90,15 +91,25 @@ public class IntakeAndOutake extends SubsystemBase {
     leaderController = shooterLeader.getPIDController();
     followerController = shooterFollower.getPIDController();
     
-    //changed to consitantly get the target RPM (changed 2-20-21)
-    kP = 0.0003;
-    kI = 0.00000001;
-    kD = 0.005;
-    kIz = 0;
-    kFF = 0.0001826;
-    kMaxOutput = 1;
-    kMinOutput = -1;
-    maxRPM = 5700;
+    if (RobotContainer.isABot()) {
+      kP = 0.0003;
+      kI = 0.00000001;
+      kD = 0.005;
+      kIz = 0;
+      kFF = 0.0001826;
+      kMaxOutput = 1;
+      kMinOutput = -1;
+      maxRPM = 5700;
+    } else {
+      kP = 0.0;
+      kI = 0;
+      kD = 0;
+      kIz = 0;
+      kFF = 0.0001826;
+      kMaxOutput = 1;
+      kMinOutput = -1;
+      maxRPM = 5700;
+    }
 
     shooterLeader.setInverted(true); // shooterFollower.setInverted(true);
     shooterLeader.setSmartCurrentLimit(current_limit); /**/ shooterFollower.setSmartCurrentLimit(current_limit);

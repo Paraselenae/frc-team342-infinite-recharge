@@ -44,6 +44,8 @@ import frc.robot.commands.MoveArm;
 import frc.robot.commands.ReverseIntake;
 import frc.robot.subsystems.IntakeAndOutake;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+
 /**
  * This class is where the bulk of the robot should be declared. Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -108,6 +110,7 @@ public class RobotContainer {
   // Autonomous
   private Command auto;
 
+  private static DigitalInput aBot = new DigitalInput(9); // limit switch that is only present on a bot
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -172,6 +175,8 @@ public class RobotContainer {
     auto = new Autonomous();
 
     configureButtonBindings();
+
+    
   }
 
   public static Joystick getJoy() {
@@ -237,6 +242,15 @@ public class RobotContainer {
 
     return auto;
     // return trajectoryCommand.andThen(() -> driveSystem.stopDrive());
+  }
+
+  /**
+   * will be present on b bot, not a bot
+   * 
+   * @return false if jumper is present
+   */
+  public static boolean isABot() {
+    return aBot.get();
   }
 
 }

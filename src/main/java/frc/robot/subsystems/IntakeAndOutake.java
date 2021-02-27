@@ -91,7 +91,7 @@ public class IntakeAndOutake extends SubsystemBase {
     leaderController = shooterLeader.getPIDController();
     followerController = shooterFollower.getPIDController();
     
-    if (RobotContainer.isABot()) {
+    if (RobotContainer.isABot()) { // a bot
       kP = 0.0003;
       kI = 0.00000001;
       kD = 0.005;
@@ -100,7 +100,7 @@ public class IntakeAndOutake extends SubsystemBase {
       kMaxOutput = 1;
       kMinOutput = -1;
       maxRPM = 5700;
-    } else {
+    } else { // b bot
       kP = 0.0;
       kI = 0;
       kD = 0;

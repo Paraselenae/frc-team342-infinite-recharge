@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.kinematics.MecanumDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-
+import frc.robot.RobotContainer;
 import frc.robot.commands.DriveWithJoystick;
 
 public class DriveSystem extends SubsystemBase {
@@ -87,14 +87,25 @@ public class DriveSystem extends SubsystemBase {
     motorRight1.setOpenLoopRampRate(ramp_rate);
     motorRight2.setOpenLoopRampRate(ramp_rate);
 
-    kP = 0.00294;
-    kI = 0.0;
-    kD = 0.0;
-    kIz = 0.0;
-    kFF = 0.0; // 0.000156
-    kMaxOutput = 1;
-    kMinOutput = -1;
-    maxRPM = 5700;
+    if (RobotContainer.isABot()) { // a bot
+      kP = 0.00294;
+      kI = 0.0;
+      kD = 0.0;
+      kIz = 0.0;
+      kFF = 0.0; // 0.000156
+      kMaxOutput = 1;
+      kMinOutput = -1;
+      maxRPM = 5700;
+    } else { // b bot
+      kP = 0.00294;
+      kI = 0.0;
+      kD = 0.0;
+      kIz = 0.0;
+      kFF = 0.0; // 0.000156
+      kMaxOutput = 1;
+      kMinOutput = -1;
+      maxRPM = 5700;
+    }
 
     setPID(motorLeft1);
     setPID(motorLeft2);

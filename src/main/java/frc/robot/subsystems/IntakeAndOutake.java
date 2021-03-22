@@ -70,6 +70,11 @@ public class IntakeAndOutake extends SubsystemBase {
 
   private Timer timer;
 
+  private int index = -1;
+  private double[] rpms = {
+
+  };
+
   /**Constructor for the class*/
   public IntakeAndOutake() {
     configureShooter();
@@ -305,7 +310,25 @@ public class IntakeAndOutake extends SubsystemBase {
 
     pidTuner();
     //targetVelocity = ((lime.getDistance() * 3.4967) + 1908);
-    targetVelocity = ((lime.getDistance() * 3.4806) + 1766.9);
+    //targetVelocity = ((lime.getDistance() * 3.4806) + 1766.9);
+
+    if (lime.getDistance() <= 90) {
+      // green zone
+      index = 0;
+    } else if (lime.getDistance() > 90 && lime.getDistance() <= 157.5) {
+      // yellow zone
+      index = 1;
+    } else if (lime.getDistance() > 157.5 && lime.getDistance() <= 232.5) {
+      // blue zone
+      index = 2;
+    } else if (lime.getDistance() > 232.5) {
+      // red zone
+      index = 3;
+    } else {
+      index = -1;
+    }
+
+    if (index != -1) targetVelocity = rpms[index];
   }
 
   /**Displays intake and outake sensors on the SmartDashboard*/
